@@ -1,0 +1,6 @@
+name = "bima-eleventy"
+type = "javascript"
+compatibility_date = "2025-07-02"
+
+[site]
+bucket = "./dist"
