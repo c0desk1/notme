@@ -1,8 +1,180 @@
 ---
 layout: base.html
-title: Beranda
-description: Selamat datang di situs saya
+title: Home
 ---
 
-<h2>Halo, Dunia!</h2>
-<p>Ini halaman utama situs HTML static menggunakan Eleventy.</p>
+<section class="min-h-[80vh] flex items-center justify-center bg-black/90 text-white text-center px-6 relative overflow-hidden">
+  <div class="absolute inset-0 backdrop-blur-md bg-black/50 z-0"></div>
+  
+  <div class="relative z-10 max-w-3xl">
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight">
+      Selamat Datang di Blog Bima
+    </h1>
+    <p class="text-zinc-400 text-lg mb-6">
+      Eksplorasi dunia teknologi, desain, dan pemikiran modern. Artikel, insight, dan dokumentasi hidup dalam satu tempat.
+    </p>
+    <div class="flex flex-wrap justify-center gap-3">
+      <a href="/blog" class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition">
+        <i class="ri-article-line"></i> Lihat Blog
+      </a>
+      <a href="#tentang" class="inline-flex items-center gap-2 px-5 py-2.5 border border-white/20 text-white hover:bg-white/10 rounded-full transition">
+        <i class="ri-user-line"></i> Tentang Saya
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 bg-black/90 text-white px-6">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold mb-10 text-center">Artikel Unggulan</h2>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Card -->
+        <a href="/blog/post-1/" class="group bg-white/5 border border-white/10 rounded-xl overflow-hidden shadow hover:shadow-blue-500/20 transition backdrop-blur">
+          <img src="https://source.unsplash.com/600x400/?tech" alt="Thumbnail" class="w-full h-48 object-cover group-hover:scale-105 transition" />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold group-hover:text-blue-400 transition">Judul Artikel Pertama</h3>
+            <p class="text-zinc-400 text-sm mt-1">Kategori • 3 menit baca</p>
+          </div>
+        </a>
+  
+        <!-- Duplikat card untuk artikel lain -->
+        <a href="/blog/post-2/" class="group bg-white/5 border border-white/10 rounded-xl overflow-hidden shadow hover:shadow-blue-500/20 transition backdrop-blur">
+          <img src="https://source.unsplash.com/600x400/?coding" alt="Thumbnail" class="w-full h-48 object-cover group-hover:scale-105 transition" />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold group-hover:text-blue-400 transition">Artikel Kedua</h3>
+            <p class="text-zinc-400 text-sm mt-1">Design • 5 menit baca</p>
+          </div>
+        </a>
+  
+        <!-- Artikel ke-3 -->
+        <a href="/blog/post-3/" class="group bg-white/5 border border-white/10 rounded-xl overflow-hidden shadow hover:shadow-blue-500/20 transition backdrop-blur">
+          <img src="https://source.unsplash.com/600x400/?blogging" alt="Thumbnail" class="w-full h-48 object-cover group-hover:scale-105 transition" />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold group-hover:text-blue-400 transition">Tulisan Ketiga</h3>
+            <p class="text-zinc-400 text-sm mt-1">WebDev • 4 menit baca</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative py-16 px-6 max-w-6xl mx-auto">
+    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-8 flex items-center gap-2">
+      <i class="ri-time-line text-blue-400 text-xl"></i> Postingan Terbaru
+    </h2>
+  
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {% for post in collections.blog | reverse | slice(0, 6) %}
+        <a href="{{ post.url }}" class="bg-white/5 border border-white/10 p-5 rounded-xl hover:bg-white/10 backdrop-blur transition group">
+          <h3 class="text-lg font-semibold text-white group-hover:text-blue-400">{{ post.data.title }}</h3>
+          <p class="text-sm text-zinc-400 mt-2">
+            {{ post.data.description | slice: 0, 100 }}...
+          </p>          
+          <div class="mt-4 flex justify-between text-xs text-zinc-500">
+            <span>{{ post.date | date: "%d %b %Y" }}</span>
+            {% if post.data.category %}
+              <span class="text-blue-400">{{ post.data.category }}</span>
+            {% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+  
+  
+  <section class="py-20 bg-black/90 text-white px-6">
+    <div class="max-w-3xl mx-auto text-center">
+      <img src="https://i.pravatar.cc/150?img=3" alt="Foto Profil" class="w-24 h-24 rounded-full mx-auto mb-4 border border-white/20 shadow" />
+      <h2 class="text-2xl font-bold mb-2">Bima Akbar</h2>
+      <p class="text-zinc-400 text-sm mb-4">
+        Seorang pengembang web dan penulis blog teknologi yang suka membagikan tutorial, eksperimen desain, dan opini tentang web masa depan.
+      </p>
+      <div class="flex justify-center gap-4 mt-4 text-lg">
+        <a href="#" class="hover:text-blue-400 transition"><i class="ri-github-line"></i></a>
+        <a href="#" class="hover:text-blue-400 transition"><i class="ri-twitter-x-line"></i></a>
+        <a href="#" class="hover:text-blue-400 transition"><i class="ri-instagram-line"></i></a>
+      </div>
+    </div>
+  </section>
+  <section class="bg-black/90 py-20 px-6 text-white">
+    <div class="max-w-5xl mx-auto text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4">Apa Kata Mereka?</h2>
+      <p class="text-zinc-400 max-w-2xl mx-auto">Testimoni dari pembaca blog yang merasa terbantu dengan artikel dan insight yang dibagikan.</p>
+    </div>
+  
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <!-- Card 1 -->
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-md shadow hover:shadow-blue-500/10 transition-all duration-300">
+        <p class="text-sm text-zinc-300 italic mb-4">"Tutorialnya rapi dan mudah dimengerti. Saya berhasil deploy website sendiri dari nol!"</p>
+        <div class="flex items-center gap-4">
+          <img src="https://i.pravatar.cc/40?img=8" alt="User 1" class="w-10 h-10 rounded-full border border-white/10" />
+          <div>
+            <h4 class="text-white font-semibold text-sm">Rizky Maulana</h4>
+            <span class="text-xs text-zinc-400">Front-End Dev</span>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Card 2 -->
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-md shadow hover:shadow-blue-500/10 transition-all duration-300">
+        <p class="text-sm text-zinc-300 italic mb-4">"Saya ikuti struktur Tailwind dari blog ini, hasilnya bersih dan modern banget."</p>
+        <div class="flex items-center gap-4">
+          <img src="https://i.pravatar.cc/40?img=12" alt="User 2" class="w-10 h-10 rounded-full border border-white/10" />
+          <div>
+            <h4 class="text-white font-semibold text-sm">Dewi Anjani</h4>
+            <span class="text-xs text-zinc-400">UI Designer</span>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Card 3 -->
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-md shadow hover:shadow-blue-500/10 transition-all duration-300">
+        <p class="text-sm text-zinc-300 italic mb-4">"Blog ini bikin saya paham struktur Astro dan integrasi Supabase dengan lebih mudah."</p>
+        <div class="flex items-center gap-4">
+          <img src="https://i.pravatar.cc/40?img=15" alt="User 3" class="w-10 h-10 rounded-full border border-white/10" />
+          <div>
+            <h4 class="text-white font-semibold text-sm">Andi Saputra</h4>
+            <span class="text-xs text-zinc-400">Back-End Dev</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="bg-black/90 py-20 px-6 text-white">
+    <div class="max-w-4xl mx-auto text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4">Pertanyaan Umum</h2>
+      <p class="text-zinc-400 max-w-2xl mx-auto">Berikut beberapa pertanyaan yang sering ditanyakan oleh pembaca.</p>
+    </div>
+  
+    <div class="max-w-3xl mx-auto divide-y divide-white/10 border border-white/10 rounded-xl bg-white/5 backdrop-blur-md overflow-hidden">
+      <!-- FAQ 1 -->
+      <details class="group p-6 transition-all duration-300 open:bg-white/5">
+        <summary class="flex justify-between items-center cursor-pointer text-white font-semibold text-lg">
+          Bagaimana cara menggunakan template ini?
+          <i class="ri-arrow-down-s-line transform transition-transform group-open:rotate-180 text-xl"></i>
+        </summary>
+        <p class="text-sm text-zinc-300 mt-4">Cukup download atau fork project ini, lalu modifikasi konten sesuai kebutuhan. Template ini sudah mendukung Tailwind dan dark mode bawaan.</p>
+      </details>
+  
+      <!-- FAQ 2 -->
+      <details class="group p-6 transition-all duration-300 open:bg-white/5">
+        <summary class="flex justify-between items-center cursor-pointer text-white font-semibold text-lg">
+          Apakah ini bisa digunakan untuk proyek komersial?
+          <i class="ri-arrow-down-s-line transform transition-transform group-open:rotate-180 text-xl"></i>
+        </summary>
+        <p class="text-sm text-zinc-300 mt-4">Ya, template ini bersifat open source dan dapat digunakan untuk kebutuhan pribadi maupun komersial tanpa batasan.</p>
+      </details>
+  
+      <!-- FAQ 3 -->
+      <details class="group p-6 transition-all duration-300 open:bg-white/5">
+        <summary class="flex justify-between items-center cursor-pointer text-white font-semibold text-lg">
+          Apakah bisa menambahkan fitur komentar?
+          <i class="ri-arrow-down-s-line transform transition-transform group-open:rotate-180 text-xl"></i>
+        </summary>
+        <p class="text-sm text-zinc-300 mt-4">Tentu. Anda bisa integrasikan komentar dummy atau pakai layanan seperti Supabase, Commento, atau sistem backend lainnya.</p>
+      </details>
+    </div>
+  </section>
+  
