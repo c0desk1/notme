@@ -1,0 +1,38 @@
+---
+// src/components/PostHeader.astro
+interface Props {
+  title: string;
+  author: string;
+  published: string;
+  readingTime: number;
+  image?: string;
+}
+
+const { title, author, published, readingTime, image } = Astro.props;
+---
+
+<header class="post-header mb-12">
+  <div class="mb-4">
+    <a href="/blog" class="inline-flex items-center text-sm text-zinc-400 hover:text-white transition">
+      <i class="ri-arrow-left-line mr-1"></i> Kembali ke Blog
+    </a>
+  </div>
+  <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
+    {title}
+  </h1>
+  <div class="text-sm text-zinc-400 flex flex-wrap gap-4 items-center mb-6">
+    <span class="flex items-center gap-1"><i class="ri-user-3-line"></i> {author}</span>
+    <span class="flex items-center gap-1"><i class="ri-calendar-line"></i> {published}</span>
+    <span class="flex items-center gap-1"><i class="ri-time-line"></i> {readingTime} menit baca</span>
+  </div>
+  {image && (
+    <div class="overflow-hidden rounded-xl">
+      <img
+        src={image}
+        alt={title}
+        class="w-full object-cover max-h-[420px] rounded-xl border border-white/10 shadow-md"
+        loading="lazy"
+      />
+    </div>
+  )}
+</header>

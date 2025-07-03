@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const apiUrl =
+  "https://www.googleapis.com/blogger/v3/blogs/5920132421647282747/posts?key=AIzaSyAF5IX_benL0vfFXYas3BYQrenGpbl4hek";
+
+const response = await fetch(apiUrl);
+const { items: posts = [] } = await response.json();
+---
+
+<BaseLayout title="Blog">
+  <section class="mt-8 max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6">Semua Postingan</h1>
+
+    <ul class="space-y-6">
+      {posts.map((post: { url: string; title: unknown; content: string; published: string | number | Date; }) => {
+        const slug = post.url.split("/").filter(Boolean).pop()?.replace(".html", "");
+        return (
+          <li>
+            <a href={`/blog/${slug}`} class="block group">
+              <h2 class="text-xl font-semibold text-white group-hover:underline">
+                {post.title}
+              </h2>
+              <p class="text-muted text-sm line-clamp-2">
+                {post.content?.replace(/<[^>]+>/g, "").slice(0, 120)}...
+              </p>
+              <p class="text-xs text-muted mt-1">
+                🕒 {new Date(post.published).toLocaleDateString("id-ID")}
+              </p>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .text-muted {
+    color: var(--color-muted);
+  }
+</style>

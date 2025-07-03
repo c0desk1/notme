@@ -1,0 +1,50 @@
+---
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import PostHeader from "../../components/PostHeader.astro";
+
+type BloggerPost = {
+  title: string;
+  content: string;
+  published: string;
+  url: string;
+  images?: { url: string }[];
+  author?: { displayName: string };
+};
+
+export async function getStaticPaths() {
+  const res = await fetch("https://www.googleapis.com/blogger/v3/blogs/5920132421647282747/posts?key=AIzaSyAF5IX_benL0vfFXYas3BYQrenGpbl4hek");
+  const json = await res.json();
+  const posts: BloggerPost[] = json.items || [];
+
+  return posts.map((post) => {
+    const slug = post.url.split("/").filter(Boolean).pop();
+    return {
+      params: { slug },
+      props: { post },
+    };
+  });
+}
+
+const { post }: { post: BloggerPost } = Astro.props;
+
+const title = post.title;
+const content = post.content;
+const author = post.author?.displayName ?? "Bima Akbar";
+const published = new Date(post.published).toLocaleDateString("id-ID", {
+  day: "numeric", month: "long", year: "numeric"
+});
+const readingTime = Math.ceil(post.content.length / 650);
+const image: string = post.images?.[0]?.url ?? "";
+---
+
+<BlogLayout title={title}>
+  <PostHeader
+    title={title}
+    author={author}
+    published={published}
+    readingTime={readingTime}
+    image={image}
+/>
+
+  <div set:html={content}></div>
+</BlogLayout>
