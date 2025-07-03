@@ -1,8 +1,0 @@
-name = "notme"
-compatibility_date = "2025-07-02"
-
-[observability.logs]
-enabled = false
-
-[site]
-bucket = "./dist"
